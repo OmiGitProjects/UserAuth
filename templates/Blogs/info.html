@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    label{
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        color:teal;
+    }
+</style>
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="text-secondary pb-2">Employee Details : </h3>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}<br>
+                <input type="submit" class='btn btn-success' value="Submit" />
+            </form>
+        </div>
+
+        <div class="col-md-6 text-center" style="margin-top: 100px;">
+            <h3 class="display-4">Onkar Lahu Nardekar</h3>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+ // Querying All Input Fields
+ var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder = 'Username..';
+    form_fields[2].placeholder = 'Email..';
+    form_fields[3].placeholder = 'Enter Password...';
+    form_fields[4].placeholder = 'Re-Enter Password...';
+</script>
+
+{% endblock content %}

@@ -1,6 +1,6 @@
 # Import Required Functions, Classes and Decorators
 from django.shortcuts import render, redirect
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, EmployeeDetails, EmployeeForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -55,3 +55,34 @@ def loginForm(request):
 def logoutView(request):
     logout(request)
     return redirect('login')
+
+def employeeDetails(request):
+
+    if request.method == 'POST':
+        form = EmployeeDetails(request.POST)
+
+        if form.is_valid():
+            emp_name = form.cleaned_data.get('emp_name')
+            department = form.cleaned_data.get('emp_department')
+            email = form.cleaned_data.get('email')
+            phone = form.cleaned_data.get('phone')
+
+            print(emp_name, department)
+
+    form = EmployeeDetails()
+    context = {'form': form}
+    return render(request, 'Blogs/info.html', context)
+
+def employeeForm(request):
+
+    if request.method == 'POST':
+        form_ = EmployeeForm(request.POST)
+
+        if form_.is_valid():
+            emp_name = form_.cleaned_data.get('emp_name')
+            messages.success(request, f'Successfully Submitted')
+            return redirect('emp_details')
+
+    form_= EmployeeForm()
+    context = {'form_': form_}
+    return render(request, 'Blogs/info_1.html', context)
